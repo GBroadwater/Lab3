@@ -25,6 +25,9 @@ public class HandPoker extends Hand {
 		// TODO : Implement this method... call each of the 'is' methods (isRoyalFlush,
 		// etc) until
 		// one of the hands is true, then score the hand
+
+		Collections.sort(super.getCards());
+		Frequency();
 		if (this.isRoyalFlush() == true)
 			return this.getHS();
 		if (this.isStraightFlush() == true)
@@ -45,16 +48,6 @@ public class HandPoker extends Hand {
 			return this.getHS();
 		if (this.isHighCard() == true)
 			return this.getHS();
-		
-		Collections.sort(super.getCards());
-		Frequency();
-
-		if (isRoyalFlush()) {
-
-		} else if (isStraightFlush()) {
-
-		}
-
 		return null;
 	}
 
@@ -207,24 +200,21 @@ public class HandPoker extends Hand {
 	public boolean isStraight() {
 		boolean bisStraight = false;
 		HandScorePoker HSP = (HandScorePoker) this.getHS();
-		int eRank = super.getCards().get(eCardNo.FIRST.getiCardNo()).geteRank().getiRankNbr();
-		int i = 1;
 		if (this.getCRC().size() == 5) {
-			while (i < 5) {
-				if ((eRank - i) == super.getCards().get(i).geteRank().getiRankNbr())
-					;
+			if (super.getCards().get(eCardNo.FIRST.getiCardNo()).geteRank().getiRankNbr() - 4 == super.getCards()
+					.get(eCardNo.FIFTH.getiCardNo()).geteRank().getiRankNbr()) {
 				bisStraight = true;
-				i++;
+				HSP.setHiCard(super.getCards().get(eCardNo.FIRST.getiCardNo()));
 			}
-			if (super.getCards().get(eCardNo.FIRST.getiCardNo()).geteRank() == pkgEnum.eRank.ACE
-					&& super.getCards().get(eCardNo.SECOND.getiCardNo()).geteRank() == pkgEnum.eRank.FIVE
-					&& super.getCards().get(eCardNo.FIFTH.getiCardNo()).geteRank() == pkgEnum.eRank.TWO) {
-				bisStraight = true;
-			}
-
 		}
+		if (super.getCards().get(eCardNo.FIRST.getiCardNo()).geteRank() == pkgEnum.eRank.ACE
+				&& super.getCards().get(eCardNo.SECOND.getiCardNo()).geteRank() == pkgEnum.eRank.FIVE
+				&& super.getCards().get(eCardNo.FIFTH.getiCardNo()).geteRank() == pkgEnum.eRank.TWO) {
+			bisStraight = true;
+			HSP.setHiCard(super.getCards().get(eCardNo.SECOND.getiCardNo()));
+		}
+
 		if (bisStraight == true) {
-			HSP.setHiCard(super.getCards().get(eCardNo.FIRST.getiCardNo()));
 			HSP.setLoCard(null);
 			HSP.seteHandStrength(eHandStrength.Straight);
 			this.setHS(HSP);
