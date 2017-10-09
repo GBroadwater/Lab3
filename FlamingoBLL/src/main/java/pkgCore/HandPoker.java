@@ -21,10 +21,7 @@ public class HandPoker extends Hand {
 
 	@Override
 	public HandScore ScoreHand() {
-		// TODO : Implement this method... call each of the 'is' methods (isRoyalFlush,
-		// etc) until
-		// one of the hands is true, then score the hand
-
+		
 		Collections.sort(super.getCards());
 		Frequency();
 		
