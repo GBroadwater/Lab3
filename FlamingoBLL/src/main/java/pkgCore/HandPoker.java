@@ -28,6 +28,7 @@ public class HandPoker extends Hand {
 
 		Collections.sort(super.getCards());
 		Frequency();
+		
 		if (this.isRoyalFlush() == true)
 			return this.getHS();
 		if (this.isStraightFlush() == true)
