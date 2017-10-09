@@ -15,7 +15,6 @@ public class HandPoker extends Hand {
 	public HandPoker() {
 		this.setHS(new HandScorePoker());
 	}
-
 	protected ArrayList<CardRankCount> getCRC() {
 		return CRC;
 	}
@@ -132,7 +131,7 @@ public class HandPoker extends Hand {
 	public boolean isFourOfAKind() {
 		boolean bisFourOfAKind = false;
 
-		if (this.getCRC().size() == 4) {
+		if (this.getCRC().size() == 2) {
 			if (this.getCRC().get(0).getiCnt() == 4) {
 
 				HandScorePoker HSP = (HandScorePoker) this.getHS();
@@ -263,14 +262,14 @@ public class HandPoker extends Hand {
 	public boolean isTwoPair() {
 		boolean bisTwoPair = false;
 		if (this.getCRC().size() == 3) {
-			if (this.getCRC().get(0).getiCnt() == 2 && this.getCRC().get(2).getiCnt() == 2) {
+			if (this.getCRC().get(0).getiCnt() == 2 && this.getCRC().get(1).getiCnt() == 2) {
 
 				HandScorePoker HSP = (HandScorePoker) this.getHS();
 				HSP.seteHandStrength(eHandStrength.TwoPair);
 				bisTwoPair = true;
 
 				HSP.setHiCard(this.getCards().get(this.getCRC().get(0).getiCardPosition()));
-				HSP.setLoCard(this.getCards().get(this.getCRC().get(2).getiCardPosition()));
+				HSP.setLoCard(this.getCards().get(this.getCRC().get(1).getiCardPosition()));
 
 				HSP.setKickers(FindTheKickers(this.getCRC()));
 				this.setHS(HSP);
@@ -288,7 +287,7 @@ public class HandPoker extends Hand {
 			if (this.getCRC().get(0).getiCnt() == 2) {
 
 				HandScorePoker HSP = (HandScorePoker) this.getHS();
-				HSP.seteHandStrength(eHandStrength.TwoPair);
+				HSP.seteHandStrength(eHandStrength.Pair);
 				bisPair = true;
 
 				HSP.setHiCard(this.getCards().get(this.getCRC().get(0).getiCardPosition()));
